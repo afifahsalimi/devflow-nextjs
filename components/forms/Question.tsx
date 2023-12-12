@@ -1,3 +1,5 @@
+"use client";
+
 import { QuestionsSchema } from "@/lib/validations";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -14,7 +16,7 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Editor } from "@tinymce/tinymce-react";
-import { Badge } from "lucide-react";
+import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { Button } from "../ui/button";
 
@@ -149,6 +151,7 @@ const Question = () => {
                 Introduce the problem and expand on what you put in the title.
                 Minimum 20 characters.
               </FormDescription>
+              <FormMessage className="text-red-500" />
             </FormItem>
           )}
         />
@@ -169,7 +172,7 @@ const Question = () => {
                   />
 
                   {field.value.length > 0 && (
-                    <div>
+                    <div className="flex-start mt-2.5 gap-2.5">
                       {field.value.map((tag: any) => (
                         <Badge
                           key={tag}
