@@ -7,3 +7,10 @@ export interface CreateQuestionParams {
   author: Schema.Types.ObjectId;
   path: string;
 }
+
+export interface GetQuestionsParams {
+  page?: number;
+  pageSize?: number;
+  searchQuery?: string;
+  filter?: string;
+}

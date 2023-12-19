@@ -5,74 +5,11 @@ import NoResult from "@/components/shared/NoResult";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
+import { getQuestions } from "@/lib/actions/question.action";
 import Link from "next/link";
 
-export default function Home() {
-  const questions = [
-    {
-      _id: "1",
-      title: "How to learn programming?",
-      questionToTags: [
-        {
-          questionId: "1",
-          tagId: "101",
-          tag: {
-            id: "101",
-            name: "Programming",
-          },
-        },
-        {
-          questionId: "1",
-          tagId: "102",
-          tag: {
-            id: "102",
-            name: "Learning",
-          },
-        },
-      ],
-      author: {
-        id: "user123",
-        name: "John Doe",
-        avatar: "https://example.com/avatar1.png",
-      },
-      upvotes: 15,
-      views: 100,
-      answers: 5,
-      createdAt: new Date("2023-01-15T08:00:00Z"),
-    },
-    {
-      _id: "2",
-      title: "Best practices for web development?",
-      questionToTags: [
-        {
-          questionId: "2",
-          tagId: "103",
-          tag: {
-            id: "103",
-            name: "Web Development",
-          },
-        },
-        {
-          questionId: "2",
-          tagId: "104",
-          tag: {
-            id: "104",
-            name: "Best Practices",
-          },
-        },
-      ],
-      author: {
-        id: "user456",
-        name: "Jane Smith",
-        avatar: "https://example.com/avatar2.png",
-      },
-      upvotes: 20,
-      views: 150,
-      answers: 8,
-      createdAt: new Date("2023-02-20T10:30:00Z"),
-    },
-    // Add more dummy data here if needed
-  ];
+export default async function Home() {
+  const result = await getQuestions({});
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -103,13 +40,13 @@ export default function Home() {
       <HomeFilters />
 
       <div className="mt-10 flex w-full flex-col gap-6">
-        {questions.length > 0 ? (
-          questions.map((question) => (
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
               title={question.title}
-              questionToTags={question.questionToTags}
+              tags={question.tags}
               author={question.author}
               upvotes={question.upvotes}
               views={question.views}
