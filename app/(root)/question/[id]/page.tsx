@@ -3,7 +3,7 @@ import Metric from "@/components/shared/Metric";
 import ParseHTML from "@/components/shared/ParseHTML";
 import RenderTag from "@/components/shared/RenderTag";
 import Votes from "@/components/shared/Votes";
-import AllAnswers from "@/lib/actions/AllAnswers";
+import AllAnswers from "@/components/shared/AllAnswers";
 import { getQuestionById } from "@/lib/actions/question.action";
 import { getUserById } from "@/lib/actions/user.action";
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
@@ -88,7 +88,11 @@ const Page = async ({ params, searchParams }) => {
         ))}
       </div>
 
-      <AllAnswers />
+      <AllAnswers
+        questionId={result._id}
+        userId={JSON.stringify(mongoUser._id)}
+        totalAnswers={result.answers.length}
+      />
 
       <Answer />
     </>
